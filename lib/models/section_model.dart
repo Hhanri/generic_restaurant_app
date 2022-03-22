@@ -4,23 +4,27 @@ import 'package:generic_restaurant_app/models/product_model.dart';
 class SectionModel extends Equatable{
   final String sectionName;
   final List<ProductModel> products;
+  final String cover;
 
   const SectionModel({
     required this.sectionName,
-    required this.products
+    required this.products,
+    required this.cover
   });
 
   factory SectionModel.fromJson(Map<String, dynamic> data) {
     return SectionModel(
       sectionName: data["sectionName"],
-      products: List<ProductModel>.from(data["products"].map((element) => ProductModel.fromJson(element)))
+      products: List<ProductModel>.from(data["products"].map((element) => ProductModel.fromJson(element))),
+      cover: data["cover"]
     );
   }
 
   static Map<String, dynamic> toJson(SectionModel model) {
     return {
       "sectionName" : model.sectionName,
-      "products" : List<Map<String, dynamic>>.from(model.products.map((e) => ProductModel.toJson(e)))
+      "products" : List<Map<String, dynamic>>.from(model.products.map((e) => ProductModel.toJson(e))),
+      "cover" : model.cover
     };
   }
 
@@ -34,5 +38,5 @@ class SectionModel extends Equatable{
 
   @override
   // TODO: implement props
-  List<Object?> get props => [sectionName, products];
+  List<Object?> get props => [sectionName, products, cover];
 }

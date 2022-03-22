@@ -1,10 +1,10 @@
-import 'package:generic_restaurant_app/models/product_model.dart';
 import 'package:generic_restaurant_app/models/section_model.dart';
 
 List<Map<String, dynamic>> test =
 [
   {
     "sectionName" : "TEST1",
+    "cover" : "assets/dessert.jpg",
     "products" : [
       {
         "productName" : "product1",
@@ -18,6 +18,7 @@ List<Map<String, dynamic>> test =
   },
   {
     "sectionName" : "TEST2",
+    "cover" : "assets/plate.jpg",
     "products" : [
       {
         "productName" : "product3",

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:generic_restaurant_app/resources/theme.dart';
 
 class ScaffoldWidget extends StatelessWidget {
   final String title;
@@ -18,13 +19,10 @@ class ScaffoldWidget extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surface,
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(30),
-            topRight:Radius.circular(30)
-          )
+          borderRadius: Design.bottomRadius
         ),
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: Design.padding,
           child: Align(
             alignment: Alignment.topCenter,
             child: SingleChildScrollView(

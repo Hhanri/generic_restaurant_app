@@ -4,6 +4,7 @@ import 'package:generic_restaurant_app/models/section_model.dart';
 import 'package:generic_restaurant_app/resources/data.dart';
 import 'package:generic_restaurant_app/resources/theme.dart';
 import 'package:generic_restaurant_app/widgets/scaffold_widget.dart';
+import 'package:generic_restaurant_app/widgets/section_card_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -36,9 +37,13 @@ class _MyHomePageState extends State<MyHomePage> {
     print(dummy);
     print(SectionModel.listFromJson(testVerif));
     print(listEquals(dummy, SectionModel.listFromJson(testVerif)));
-    return const ScaffoldWidget(
+    return ScaffoldWidget(
       title: "test",
-      child: Text("haha")
+      child: Column(
+        children: [
+          ...dummy.map((e) => SectionCardWidget(section: e)).toList()
+        ],
+      )
     );
   }
 }
