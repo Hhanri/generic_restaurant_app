@@ -15,7 +15,7 @@ class SectionModel extends Equatable{
   factory SectionModel.fromJson(Map<String, dynamic> data) {
     return SectionModel(
       sectionName: data["sectionName"],
-      products: List<ProductModel>.from(data["products"].map((element) => ProductModel.fromJson(element))),
+      products: List<ProductModel>.from(data["products"].map((jsonProduct) => ProductModel.fromJson(jsonProduct))),
       cover: data["cover"]
     );
   }
@@ -23,17 +23,17 @@ class SectionModel extends Equatable{
   static Map<String, dynamic> toJson(SectionModel model) {
     return {
       "sectionName" : model.sectionName,
-      "products" : List<Map<String, dynamic>>.from(model.products.map((e) => ProductModel.toJson(e))),
+      "products" : List<Map<String, dynamic>>.from(model.products.map((product) => ProductModel.toJson(product))),
       "cover" : model.cover
     };
   }
 
   static List<SectionModel> listFromJson(List<Map<String, dynamic>> data) {
-    return List<SectionModel>.from(data.map((e) => SectionModel.fromJson(e)));
+    return List<SectionModel>.from(data.map((jsonSection) => SectionModel.fromJson(jsonSection)));
   }
 
   static List<Map<String, dynamic>> listToJson(List<SectionModel> listModel) {
-    return List<Map<String, dynamic>>.from(listModel.map((e) => toJson(e)));
+    return List<Map<String, dynamic>>.from(listModel.map((section) => toJson(section)));
   }
 
   @override
