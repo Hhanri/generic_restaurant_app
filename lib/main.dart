@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:generic_restaurant_app/models/product_model.dart';
 import 'package:generic_restaurant_app/models/section_model.dart';
+import 'package:generic_restaurant_app/resources/theme.dart';
+import 'package:generic_restaurant_app/widgets/scaffold_widget.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,9 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Restaurant App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: theme,
       home: const MyHomePage(),
     );
   }
@@ -50,9 +49,6 @@ class _MyHomePageState extends State<MyHomePage> {
     final testVerif = SectionModel.toJson(dummy);
     print(dummy == SectionModel.fromJson(testVerif));
 
-    return Scaffold(
-      appBar: AppBar(),
-      body: Center()
-    );
+    return const ScaffoldWidget(title: "test", child: Text("haha"));
   }
 }

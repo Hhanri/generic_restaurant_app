@@ -5,7 +5,7 @@ class SectionModel extends Equatable{
   final String sectionName;
   final List<ProductModel> products;
 
-  SectionModel({
+  const SectionModel({
     required this.sectionName,
     required this.products
   });

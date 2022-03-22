@@ -4,7 +4,7 @@ class ProductModel extends Equatable{
   final String productName;
   final String price;
 
-  ProductModel({
+  const ProductModel({
     required this.productName,
     required this.price
   });
