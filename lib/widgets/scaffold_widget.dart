@@ -27,7 +27,9 @@ class ScaffoldWidget extends StatelessWidget {
           padding: const EdgeInsets.all(8.0),
           child: Align(
             alignment: Alignment.topCenter,
-            child: child,
+            child: SingleChildScrollView(
+              child: child
+            ),
           )
         )
       ),

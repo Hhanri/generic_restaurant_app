@@ -24,6 +24,14 @@ class SectionModel extends Equatable{
     };
   }
 
+  static List<SectionModel> listFromJson(List<Map<String, dynamic>> data) {
+    return List<SectionModel>.from(data.map((e) => SectionModel.fromJson(e)));
+  }
+
+  static List<Map<String, dynamic>> listToJson(List<SectionModel> listModel) {
+    return List<Map<String, dynamic>>.from(listModel.map((e) => toJson(e)));
+  }
+
   @override
   // TODO: implement props
   List<Object?> get props => [sectionName, products];
