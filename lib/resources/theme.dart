@@ -3,7 +3,14 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 
 final ThemeData theme = ThemeData(
-
+  textTheme: const TextTheme(
+    headline4: TextStyle(
+      color: Colors.white
+    ),
+    headline6: TextStyle(
+      color: Colors.white
+    ),
+  ),
   appBarTheme: const AppBarTheme(
     color: Colors.amberAccent,
     centerTitle: true,
@@ -27,14 +34,21 @@ class Design {
   static Radius singleRadius = const Radius.circular(30);
 
   static BoxShadow shadow = BoxShadow(
-    color: Colors.black.withOpacity(0.3),
-    spreadRadius: 1,
-    blurRadius: 3,
+    color: Colors.black.withOpacity(0.6),
+    spreadRadius: 2,
+    blurRadius: 4,
     offset: const Offset(0, 4), // changes position of shadow
   );
 
   static final BorderRadius bottomRadius = BorderRadius.only(
       topLeft: Design.singleRadius,
       topRight: Design.singleRadius
+  );
+
+  static LinearGradient gradient = const LinearGradient(
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+      colors: [Colors.transparent, Colors.black],
+      stops: [0.0, 0.9]
   );
 }

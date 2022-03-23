@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:generic_restaurant_app/models/section_model.dart';
 import 'package:generic_restaurant_app/pages/section_page.dart';
 import 'package:generic_restaurant_app/resources/theme.dart';
@@ -27,41 +28,40 @@ class SectionCardWidget extends StatelessWidget {
       },
       child: Padding(
         padding:Design.padding,
-        child: Container(
-          decoration: BoxDecoration(
-            borderRadius: Design.circularRadius,
-            boxShadow: [
-              Design.shadow
-            ]
-          ),
-          child: ClipRRect(
-            borderRadius: Design.circularRadius,
-            child: Container(
-              alignment: Alignment.bottomCenter,
-              height: _height/4,
+        child: Stack(
+          children: [
+            Container(
               decoration: BoxDecoration(
+                borderRadius: Design.circularRadius,
                 image: DecorationImage(
-                  fit: BoxFit.cover,
                   image: AssetImage(
                     section.cover
-                  )
+                  ),
+                  fit: BoxFit.cover
                 ),
+                boxShadow: [Design.shadow]
               ),
-              child: BackdropFilter(
-                filter: Design.blur,
-                child: Container(
-                  width: double.infinity,
-                  color: Colors.white,
+              height: _height/4,
+            ),
+            Container(
+              height: _height/4,
+              decoration: BoxDecoration(
+                borderRadius: Design.circularRadius,
+                gradient: Design.gradient
+              ),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Padding(
                   padding: Design.padding,
                   child: Text(
                     section.sectionName,
-                    textAlign: TextAlign.center,
-                  )
+                    style: Theme.of(context).textTheme.headline6,
+                  ),
                 ),
-              )
-            ),
-          ),
-        ),
+              ),
+            )
+          ],
+        )
       ),
     );
   }
