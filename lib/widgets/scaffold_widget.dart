@@ -23,17 +23,17 @@ class ScaffoldWidget extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surface,
-          borderRadius: Design.bottomRadius
+          borderRadius: Design.topRadius
         ),
-        child: Padding(
-          padding: Design.padding,
+        child: ClipRRect(
+          borderRadius: Design.topRadius,
           child: Align(
             alignment: Alignment.topCenter,
             child: ScrollConfiguration(
               behavior: CustomScroll(),
               child: SingleChildScrollView(child: child)
             ),
-          )
+          ),
         )
       ),
     );

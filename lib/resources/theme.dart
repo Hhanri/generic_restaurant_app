@@ -40,7 +40,7 @@ class Design {
     offset: const Offset(0, 4), // changes position of shadow
   );
 
-  static final BorderRadius bottomRadius = BorderRadius.only(
+  static final BorderRadius topRadius = BorderRadius.only(
       topLeft: Design.singleRadius,
       topRight: Design.singleRadius
   );
