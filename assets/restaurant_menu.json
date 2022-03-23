@@ -1,7 +1,7 @@
 [
   {
     "sectionName" : "TEST1",
-    "cover" : "assets/dessert.jpg",
+    "cover" : "assets/images/dessert.jpg",
     "products" : [
       {
         "productName" : "product1",
@@ -15,7 +15,7 @@
   },
   {
     "sectionName" : "TEST2",
-    "cover" : "assets/plate.jpg",
+    "cover" : "assets/images/plate.jpg",
     "products" : [
       {
         "productName" : "product3",
@@ -29,7 +29,7 @@
   },
   {
     "sectionName" : "TEST2",
-    "cover" : "assets/plate.jpg",
+    "cover" : "assets/images/plate.jpg",
     "products" : [
       {
         "productName" : "product3",
@@ -43,7 +43,7 @@
   },
   {
     "sectionName" : "TEST2",
-    "cover" : "assets/plate.jpg",
+    "cover" : "assets/images/plate.jpg",
     "products" : [
       {
         "productName" : "product3",

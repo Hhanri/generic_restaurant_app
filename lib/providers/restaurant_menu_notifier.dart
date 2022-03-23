@@ -9,7 +9,7 @@ class RestaurantMenuNotifier extends StateNotifier<List<SectionModel>> {
   static const List<SectionModel> _initialState = [];
 
   void fetchLocalData() async{
-    final String response = await rootBundle.loadString('assets/data.json');
+    final String response = await rootBundle.loadString('assets/restaurant_menu.json');
     final data = await json.decode(response);
     print(data);
     final List<SectionModel> treatedData = SectionModel.listFromJson(data);
