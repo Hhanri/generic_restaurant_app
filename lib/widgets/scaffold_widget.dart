@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:generic_restaurant_app/resources/theme.dart';
+import 'package:generic_restaurant_app/widgets/custom_scroll_widget.dart';
 
 class ScaffoldWidget extends StatelessWidget {
   final String title;
@@ -28,8 +29,9 @@ class ScaffoldWidget extends StatelessWidget {
           padding: Design.padding,
           child: Align(
             alignment: Alignment.topCenter,
-            child: SingleChildScrollView(
-              child: child
+            child: ScrollConfiguration(
+              behavior: CustomScroll(),
+              child: SingleChildScrollView(child: child)
             ),
           )
         )
