@@ -22,11 +22,13 @@ class ProductModel extends Equatable{
     };
   }
 
-  static String displayPrice(ProductModel model) {
-    return model.price + "€";
-  }
-
   @override
   // TODO: implement props
   List<Object?> get props => [productName, price];
+}
+
+extension DisplayPrice on ProductModel {
+  String getPrice() {
+    return price + "€";
+  }
 }

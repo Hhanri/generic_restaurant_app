@@ -12,7 +12,7 @@ class ProductTileWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListTile(
       title: Text(product.productName),
-      trailing: Text(product.price),
+      trailing: Text(product.getPrice()),
       dense: true,
     );
   }

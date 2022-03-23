@@ -30,6 +30,34 @@ List<Map<String, dynamic>> test =
       }
     ]
   },
+  {
+    "sectionName" : "TEST2",
+    "cover" : "assets/plate.jpg",
+    "products" : [
+      {
+        "productName" : "product3",
+        "price" : "15"
+      },
+      {
+        "productName" : "product4",
+        "price" : "16"
+      }
+    ]
+  },
+  {
+    "sectionName" : "TEST2",
+    "cover" : "assets/plate.jpg",
+    "products" : [
+      {
+        "productName" : "product3",
+        "price" : "15"
+      },
+      {
+        "productName" : "product4",
+        "price" : "16"
+      }
+    ]
+  },
 ];
 final List<SectionModel> dummy = SectionModel.listFromJson(test);
 final testVerif = SectionModel.listToJson(dummy);
