@@ -1,6 +1,3 @@
-import 'package:generic_restaurant_app/models/section_model.dart';
-
-List<Map<String, dynamic>> test =
 [
   {
     "sectionName" : "TEST1",
@@ -57,7 +54,5 @@ List<Map<String, dynamic>> test =
         "price" : "16"
       }
     ]
-  },
-];
-final List<SectionModel> dummy = SectionModel.listFromJson(test);
-final testVerif = SectionModel.listToJson(dummy);
+  }
+]

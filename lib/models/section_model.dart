@@ -28,7 +28,7 @@ class SectionModel extends Equatable{
     };
   }
 
-  static List<SectionModel> listFromJson(List<Map<String, dynamic>> data) {
+  static List<SectionModel> listFromJson(List<dynamic> data) {
     return List<SectionModel>.from(data.map((jsonSection) => SectionModel.fromJson(jsonSection)));
   }
 
