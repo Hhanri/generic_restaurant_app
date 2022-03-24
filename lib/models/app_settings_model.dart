@@ -26,7 +26,10 @@ class AppSettings {
         headline4: TextStyle(
           color: Color(int.parse(json[AppConstants.fontColor]))
         ),
-    )
+        headline6: TextStyle(
+          color: Color(int.parse(json[AppConstants.fontColor]))
+        ),
+      )
     );
   }
 
