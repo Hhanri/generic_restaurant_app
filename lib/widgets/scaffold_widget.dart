@@ -23,10 +23,10 @@ class ScaffoldWidget extends StatelessWidget {
       body: Container(
         decoration: BoxDecoration(
           color: Theme.of(context).colorScheme.surface,
-          borderRadius: Design.topRadius
+          borderRadius: Design.defaultDesign.topRadius
         ),
         child: ClipRRect(
-          borderRadius: Design.topRadius,
+          borderRadius: Design.defaultDesign.topRadius,
           child: Align(
             alignment: Alignment.topCenter,
             child: ScrollConfiguration(

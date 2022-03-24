@@ -26,32 +26,32 @@ class SectionCardWidget extends StatelessWidget {
         );
       },
       child: Padding(
-        padding:Design.padding,
+        padding:Design.defaultDesign.padding,
         child: Stack(
           children: [
             Container(
               decoration: BoxDecoration(
-                borderRadius: Design.circularRadius,
+                borderRadius: Design.defaultDesign.circularRadius,
                 image: DecorationImage(
                   image: AssetImage(
                     section.cover
                   ),
                   fit: BoxFit.cover
                 ),
-                boxShadow: [Design.shadow]
+                boxShadow: [Design.defaultDesign.shadow]
               ),
               height: _height/4,
             ),
             Container(
               height: _height/4,
               decoration: BoxDecoration(
-                borderRadius: Design.circularRadius,
-                gradient: Design.gradient
+                borderRadius: Design.defaultDesign.circularRadius,
+                gradient: Design.defaultDesign.gradient
               ),
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
-                  padding: Design.padding,
+                  padding: Design.defaultDesign.padding,
                   child: Text(
                     section.sectionName,
                     style: Theme.of(context).textTheme.headline6,

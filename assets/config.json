@@ -1,0 +1,37 @@
+{
+  "appTitle" : "Restaurant",
+  "useDefaultTheme" : false,
+  "theme" : {
+    "mainColor" : "0xFFFFD740",
+    "brightness" : "light",
+    "fontColor" : "0xFFFFFFFF"
+  },
+
+  "design" : {
+    "padding" : 8,
+    "blur" : {
+      "x" : 3,
+      "y" : 3
+    },
+    "circularRadius" : 30,
+    "singleRadius" : 30,
+    "boxShadow" : {
+      "color" : "0xFF000000",
+      "opacity" : 0.6,
+      "spreadRadius" : 2,
+      "blurRadius" : 4,
+      "offSet" : {
+        "x" : 0,
+        "y" : 4
+      }
+    },
+    "gradient" : {
+      "colors" : [
+        "0xFF000000",
+        "0xB3000000",
+        "0xDE000000"
+      ],
+      "stops" : [0.0, 0.6, 0.8]
+    }
+  }
+}

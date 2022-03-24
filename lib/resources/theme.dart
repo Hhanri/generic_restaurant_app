@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 
 final ThemeData theme = ThemeData(
@@ -16,39 +15,75 @@ final ThemeData theme = ThemeData(
     centerTitle: true,
     elevation: 0,
   ),
-
   scaffoldBackgroundColor: Colors.amberAccent,
-
   brightness: Brightness.light,
-  primarySwatch: Colors.amber
 );
 
 class Design {
 
-  static EdgeInsets padding = const EdgeInsets.all(8);
+  final EdgeInsets padding;
+  final ImageFilter blur;
+  final BorderRadius circularRadius;
+  final Radius singleRadius;
+  final BoxShadow shadow;
+  final BorderRadius topRadius;
+  final LinearGradient gradient;
 
-  static final ImageFilter blur = ImageFilter.blur(sigmaX: 3, sigmaY: 3);
+  Design({
+    required this.padding,
+    required this.blur,
+    required this.circularRadius,
+    required this.singleRadius,
+    required this.shadow,
+    required this.topRadius,
+    required this.gradient
+  });
 
-  static final BorderRadius circularRadius = BorderRadius.circular(30);
+  factory Design.generate(Map<String, dynamic> json) {
+    return Design(
+      padding: EdgeInsets.all(json["padding"]),
+      blur: ImageFilter.blur(sigmaX: json["blur"]["x"], sigmaY: json["blur"]["y"]),
+      circularRadius: BorderRadius.circular(json["circularRadius"]),
+      singleRadius: Radius.circular(json["singleRadius"]),
+      shadow: BoxShadow(
+        color: Color(int.parse(json["boxShadow"]["color"])).withOpacity(json["opacity"]),
+        spreadRadius: json["spreadRadius"],
+        blurRadius: json["blurRadius"],
+        offset: Offset(json["offSet"]["x"], json["offSet"]["y"]), // changes position of shadow
+      ),
+      topRadius: BorderRadius.only(
+        topLeft: Radius.circular(json["singleRadius"]),
+        topRight: Radius.circular(json["singleRadius"])
+      ),
+      gradient: LinearGradient(
+        begin: Alignment.topCenter,
+        end: Alignment.bottomCenter,
+        colors: json["gradient"]["colors"].map((String value) => Color(int.parse(value))).toList(),
+        stops: json["gradient"]["stops"]
+      )
+    );
+  }
 
-  static Radius singleRadius = const Radius.circular(30);
-
-  static BoxShadow shadow = BoxShadow(
-    color: Colors.black.withOpacity(0.6),
-    spreadRadius: 2,
-    blurRadius: 4,
-    offset: const Offset(0, 4), // changes position of shadow
-  );
-
-  static final BorderRadius topRadius = BorderRadius.only(
-      topLeft: Design.singleRadius,
-      topRight: Design.singleRadius
-  );
-
-  static LinearGradient gradient = LinearGradient(
+  static Design defaultDesign = Design(
+    padding: const EdgeInsets.all(8),
+    blur: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+    circularRadius: BorderRadius.circular(30),
+    singleRadius: const Radius.circular(30),
+    shadow: BoxShadow(
+      color: Colors.black.withOpacity(0.6),
+      spreadRadius: 2,
+      blurRadius: 4,
+      offset: const Offset(0, 4), // changes position of shadow
+    ),
+    topRadius: const BorderRadius.only(
+      topLeft: Radius.circular(30),
+      topRight: Radius.circular(30)
+    ),
+    gradient: LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: [Colors.transparent, Colors.black.withOpacity(0.7), Colors.black.withOpacity(0.87)],
       stops: const [0.0, 0.6, 0.8]
+    )
   );
 }
