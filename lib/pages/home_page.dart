@@ -25,12 +25,11 @@ class HomeScreen extends StatelessWidget {
               ...sections.map(
                 (section) => SectionCardWidget(
                   section: section,
-                  design: design,
                 )
               ).toList()
             ],
           ),
-          design: ref.watch(appSettingsProvider).design,
+          design: design,
         );
       }
     );
