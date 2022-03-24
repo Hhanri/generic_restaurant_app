@@ -45,10 +45,10 @@ class Design {
       topRight: Design.singleRadius
   );
 
-  static LinearGradient gradient = const LinearGradient(
+  static LinearGradient gradient = LinearGradient(
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
-      colors: [Colors.transparent, Colors.black],
-      stops: [0.0, 0.9]
+      colors: [Colors.transparent, Colors.black.withOpacity(0.7), Colors.black.withOpacity(0.87)],
+      stops: const [0.0, 0.6, 0.8]
   );
 }
