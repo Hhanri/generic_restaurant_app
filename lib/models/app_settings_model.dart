@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:generic_restaurant_app/resources/app_constants.dart';
 import 'package:generic_restaurant_app/resources/theme.dart';
 
 class AppSettings {
@@ -14,16 +15,16 @@ class AppSettings {
 
   static ThemeData generateTheme(Map<String, dynamic> json) {
     return ThemeData(
-      brightness: json["brightness"] == "dark" ? Brightness.dark : Brightness.light,
+      brightness: json[AppConstants.brightness] == "dark" ? Brightness.dark : Brightness.light,
       appBarTheme: AppBarTheme(
-        color: Color(int.parse(json["mainColor"])),
+        color: Color(int.parse(json[AppConstants.mainColor])),
         centerTitle: true,
         elevation: 0,
       ),
-      scaffoldBackgroundColor: Color(int.parse(json["mainColor"])),
+      scaffoldBackgroundColor: Color(int.parse(json[AppConstants.mainColor])),
       textTheme: TextTheme(
         headline4: TextStyle(
-          color: Color(int.parse(json["fontColor"]))
+          color: Color(int.parse(json[AppConstants.fontColor]))
         ),
     )
     );
@@ -31,9 +32,17 @@ class AppSettings {
 
   factory AppSettings.generate(Map<String, dynamic> json) {
     return AppSettings(
-      appTitle: json["appTitle"],
-      theme: generateTheme(json["theme"]),
-      design: Design.generate(json["design"])
+      appTitle: json[AppConstants.appTitle],
+      theme: generateTheme(json[AppConstants.theme]),
+      design: Design.generate(json[AppConstants.design])
+    );
+  }
+
+  factory AppSettings.generateDefault() {
+    return AppSettings(
+      appTitle: "Restaurant",
+      theme: defaultTheme,
+      design: Design.defaultDesign
     );
   }
 }

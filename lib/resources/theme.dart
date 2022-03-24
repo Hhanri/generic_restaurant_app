@@ -1,7 +1,8 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
+import 'package:generic_restaurant_app/resources/app_constants.dart';
 
-final ThemeData theme = ThemeData(
+final ThemeData defaultTheme = ThemeData(
   textTheme: const TextTheme(
     headline4: TextStyle(
       color: Colors.white
@@ -41,25 +42,25 @@ class Design {
 
   factory Design.generate(Map<String, dynamic> json) {
     return Design(
-      padding: EdgeInsets.all(json["padding"]),
-      blur: ImageFilter.blur(sigmaX: json["blur"]["x"], sigmaY: json["blur"]["y"]),
-      circularRadius: BorderRadius.circular(json["circularRadius"]),
-      singleRadius: Radius.circular(json["singleRadius"]),
+      padding: EdgeInsets.all(json[AppConstants.padding].toDouble()),
+      blur: ImageFilter.blur(sigmaX: json[AppConstants.blur][AppConstants.x].toDouble(), sigmaY: json[AppConstants.blur][AppConstants.y].toDouble()),
+      circularRadius: BorderRadius.circular(json[AppConstants.circularRadius].toDouble()),
+      singleRadius: Radius.circular(json[AppConstants.singleRadius].toDouble()),
       shadow: BoxShadow(
-        color: Color(int.parse(json["boxShadow"]["color"])).withOpacity(json["opacity"]),
-        spreadRadius: json["spreadRadius"],
-        blurRadius: json["blurRadius"],
-        offset: Offset(json["offSet"]["x"], json["offSet"]["y"]), // changes position of shadow
+        color: Color(int.parse(json[AppConstants.boxShadow][AppConstants.color])).withOpacity(json[AppConstants.boxShadow][AppConstants.opacity].toDouble()),
+        spreadRadius: json[AppConstants.boxShadow][AppConstants.spreadRadius].toDouble(),
+        blurRadius: json[AppConstants.boxShadow][AppConstants.blurRadius].toDouble(),
+        offset: Offset(json[AppConstants.boxShadow][AppConstants.offSet][AppConstants.x].toDouble(), json[AppConstants.boxShadow][AppConstants.offSet][AppConstants.y].toDouble()), // changes position of shadow
       ),
       topRadius: BorderRadius.only(
-        topLeft: Radius.circular(json["singleRadius"]),
-        topRight: Radius.circular(json["singleRadius"])
+        topLeft: Radius.circular(json[AppConstants.singleRadius].toDouble()),
+        topRight: Radius.circular(json[AppConstants.singleRadius].toDouble())
       ),
       gradient: LinearGradient(
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
-        colors: json["gradient"]["colors"].map((String value) => Color(int.parse(value))).toList(),
-        stops: json["gradient"]["stops"]
+        colors: List<Color>.from(json[AppConstants.gradient][AppConstants.colors].map((var value) => Color(int.parse(value)))),
+        stops: List<double>.from(json[AppConstants.gradient][AppConstants.stops])
       )
     );
   }

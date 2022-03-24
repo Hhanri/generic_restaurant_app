@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:generic_restaurant_app/pages/home_page.dart';
-import 'package:generic_restaurant_app/resources/theme.dart';
+import 'package:generic_restaurant_app/providers/providers.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,14 +12,29 @@ void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerStatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  _MyAppState createState() => _MyAppState();
+}
+
+class _MyAppState extends ConsumerState<MyApp> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      ref.watch(restaurantMenuProvider.notifier).fetchLocalData();
+      ref.watch(connectivityProvider.notifier).startListeningConnectivityState();
+      ref.watch(appSettingsProvider.notifier).loadSettings();
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Restaurant App',
-      theme: theme,
+      theme: ref.watch(appSettingsProvider).theme,
       home: const HomeScreen(),
     );
   }
