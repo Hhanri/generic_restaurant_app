@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:generic_restaurant_app/resources/theme.dart';
 import 'package:generic_restaurant_app/widgets/custom_scroll_widget.dart';
+import 'package:generic_restaurant_app/widgets/glassmorphism_widget.dart';
 
 class ScaffoldWidget extends StatelessWidget {
   final String title;
@@ -22,23 +23,17 @@ class ScaffoldWidget extends StatelessWidget {
           style: Theme.of(context).textTheme.headline4,
         ),
       ),
-      body: Container(
-        decoration: BoxDecoration(
-          color: Theme.of(context).colorScheme.surface,
-          borderRadius: design.topRadius
+      body: GlassmorphismWidget(
+        design: design,
+        child: ScrollConfiguration(
+          behavior: CustomScroll(),
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: design.padding,
+              child: child
+            )
+          )
         ),
-        child: ClipRRect(
-          borderRadius: design.topRadius,
-          child: Align(
-            alignment: Alignment.topCenter,
-            child: ScrollConfiguration(
-              behavior: CustomScroll(),
-              child: SingleChildScrollView(
-                child: child
-              )
-            ),
-          ),
-        )
       ),
     );
   }

@@ -9,10 +9,6 @@
 
   "design" : {
     "padding" : 8.0,
-    "blur" : {
-      "x" : 3,
-      "y" : 3
-    },
     "circularRadius" : 30,
     "singleRadius" : 30,
     "boxShadow" : {
@@ -32,6 +28,17 @@
         "0xDE000000"
       ],
       "stops" : [0.0, 0.6, 0.8]
+    },
+    "glassmorphism" : {
+      "borderWidth" : 1.5,
+      "borderColor" : "0xFFFFFFFF",
+      "borderOpacity" : 0.1,
+      "color" : "0xFFFFFFFFF",
+      "opacity" : 0.6,
+      "blur" : {
+        "x" : 12,
+        "y" : 12
+      }
     }
   }
 }

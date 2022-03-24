@@ -7,9 +7,6 @@ class AppConstants {
   static String fontColor = "fontColor";
   static String design = "design";
   static String padding = "padding";
-  static String blur = "blur";
-  static String x = "x";
-  static String y = "y";
   static String circularRadius = "circularRadius";
   static String singleRadius = "singleRadius";
   static String boxShadow = "boxShadow";
@@ -21,4 +18,11 @@ class AppConstants {
   static String gradient = "gradient";
   static String colors = "colors";
   static String stops = "stops";
+  static String glassmorphism = "glassmorphism";
+  static String borderWidth = "borderWidth";
+  static String borderColor = "borderColor";
+  static String borderOpacity = "borderOpacity";
+  static String blur = "blur";
+  static String x = "x";
+  static String y = "y";
 }
