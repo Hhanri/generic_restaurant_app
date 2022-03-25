@@ -1,58 +1,60 @@
-[
-  {
-    "sectionName" : "TEST1",
-    "cover" : "assets/images/dessert.jpg",
-    "products" : [
-      {
-        "productName" : "product1",
-        "price" : "13"
-      },
-      {
-        "productName" : "product2",
-        "price" : "12"
-      }
-    ]
-  },
-  {
-    "sectionName" : "TEST2",
-    "cover" : "assets/images/plate.jpg",
-    "products" : [
-      {
-        "productName" : "product3",
-        "price" : "15"
-      },
-      {
-        "productName" : "product4",
-        "price" : "16"
-      }
-    ]
-  },
-  {
-    "sectionName" : "TEST2",
-    "cover" : "assets/images/plate.jpg",
-    "products" : [
-      {
-        "productName" : "product3",
-        "price" : "15"
-      },
-      {
-        "productName" : "product4",
-        "price" : "16"
-      }
-    ]
-  },
-  {
-    "sectionName" : "TEST2",
-    "cover" : "assets/images/plate.jpg",
-    "products" : [
-      {
-        "productName" : "product3",
-        "price" : "15"
-      },
-      {
-        "productName" : "product4",
-        "price" : "16"
-      }
-    ]
-  }
-]
+{"restaurantMenu" :
+  [
+    {
+      "sectionName": "TEST1",
+      "cover": "assets/images/dessert.jpg",
+      "products": [
+        {
+          "productName": "product1",
+          "price": "13"
+        },
+        {
+          "productName": "product2",
+          "price": "12"
+        }
+      ]
+    },
+    {
+      "sectionName": "TEST2",
+      "cover": "assets/images/plate.jpg",
+      "products": [
+        {
+          "productName": "product3",
+          "price": "15"
+        },
+        {
+          "productName": "product4",
+          "price": "16"
+        }
+      ]
+    },
+    {
+      "sectionName": "TEST2",
+      "cover": "assets/images/plate.jpg",
+      "products": [
+        {
+          "productName": "product3",
+          "price": "15"
+        },
+        {
+          "productName": "product4",
+          "price": "16"
+        }
+      ]
+    },
+    {
+      "sectionName": "TEST2",
+      "cover": "assets/images/plate.jpg",
+      "products": [
+        {
+          "productName": "product3",
+          "price": "15"
+        },
+        {
+          "productName": "product4",
+          "price": "16"
+        }
+      ]
+    }
+  ]
+}

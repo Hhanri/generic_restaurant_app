@@ -1,5 +1,6 @@
 class AppConstants {
   static String appTitle = "appTitle";
+  static String restaurantMenu = "restaurantMenu";
   static String useDefaultTheme = "useDefaultTheme";
   static String theme = "theme";
   static String mainColor = "mainColor";
