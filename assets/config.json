@@ -32,12 +32,17 @@
     "glassmorphism" : {
       "borderWidth" : 1.5,
       "borderColor" : "0xFFFFFFFF",
-      "borderOpacity" : 0.1,
-      "color" : "0xFFFFFFFFF",
+      "borderOpacity" : 0.2,
       "opacity" : 0.6,
       "blur" : {
         "x" : 12,
         "y" : 12
+      },
+      "gradient" : {
+        "colors" : [
+          "0x99FFFFFF",
+          "0x1AFFFFFF"
+        ]
       }
     }
   }

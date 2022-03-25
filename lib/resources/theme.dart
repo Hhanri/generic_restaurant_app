@@ -62,7 +62,11 @@ class Design {
         width: json[AppConstants.glassmorphism][AppConstants.borderWidth],
         color: Color(int.parse(json[AppConstants.glassmorphism][AppConstants.borderColor])).withOpacity(json[AppConstants.glassmorphism][AppConstants.borderOpacity])
       ),
-      color: Color(int.parse(json[AppConstants.glassmorphism][AppConstants.color])).withOpacity(json[AppConstants.glassmorphism][AppConstants.opacity])
+      gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: List<Color>.from(json[AppConstants.glassmorphism][AppConstants.gradient][AppConstants.colors].map((var value) => Color(int.parse(value))))
+      )
     );
     final ImageFilter _glassmorphismBlur = ImageFilter.blur(sigmaX: json[AppConstants.glassmorphism][AppConstants.blur][AppConstants.x].toDouble(), sigmaY: json[AppConstants.glassmorphism][AppConstants.blur][AppConstants.y].toDouble());
 
@@ -100,6 +104,11 @@ class Design {
         width: 1.5,
         color: Colors.white.withOpacity(0.1)
       ),
+      gradient: LinearGradient(
+        begin: Alignment.topLeft,
+        end: Alignment.bottomRight,
+        colors: [Colors.white.withOpacity(0.6), Colors.white.withOpacity(0.1)]
+      )
     ),
   );
 }
