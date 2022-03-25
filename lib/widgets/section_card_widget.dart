@@ -16,7 +16,7 @@ class SectionCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final double _height = MediaQuery.of(context).size.height;
+    final double _containerHeight = MediaQuery.of(context).size.height/4;
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, Widget? child) {
         final Design design = ref.watch(appSettingsProvider).design;
@@ -42,36 +42,37 @@ class SectionCardWidget extends StatelessWidget {
                     future: ref.watch(firebaseProvider).downloadURL(section.cover),
                     builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
                       if (snapshot.hasData) {
-                        return ImageContainerDecoration(
-                          design: design,
-                          section: section,
-                          height: _height/4,
-                          imageProvider: CachedNetworkImageProvider(snapshot.data),
+                        print(snapshot.data);
+                        return SectionCardContainerWidget(
+                          parameters: ImageContainerParameters(
+                            design: design,
+                            imageProvider: CachedNetworkImageProvider(snapshot.data),
+                            height: _containerHeight,
+                          )
                         );
                       }
-                      return LoadingSectionCardWidget(design: design, height: _height/4);
+                      return SectionCardContainerWidget(
+                        parameters: LoadingContainerParameters(
+                          design: design,
+                          height: _containerHeight,
+                        )
+                      );
                     },
                   )
-                : ImageContainerDecoration(
+                : SectionCardContainerWidget(
+                    parameters: ImageContainerParameters(
                     design: design,
-                    section: section,
-                    height: _height/4,
-                    imageProvider: AssetImage(section.cover)
+                    imageProvider: AssetImage(section.cover),
+                    height: _containerHeight,
+                    )
                   ),
-                Container(
-                  height: _height/4,
-                  decoration: BoxDecoration(
-                    borderRadius: design.circularRadius,
-                    gradient: design.gradient
-                  ),
-                  child: Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Padding(
-                      padding: design.padding,
-                      child: Text(
-                        section.sectionName,
-                        style: Theme.of(context).textTheme.headline6,
-                      ),
+                SectionCardContainerWidget(
+                  parameters: GradientContainerParameters(
+                    design: design,
+                    height: _containerHeight,
+                    child: Text(
+                      section.sectionName,
+                      style: Theme.of(context).textTheme.headline6,
                     ),
                   ),
                 )
@@ -84,52 +85,90 @@ class SectionCardWidget extends StatelessWidget {
   }
 }
 
-class ImageContainerDecoration extends StatelessWidget {
-  final Design design;
-  final SectionModel section;
-  final double height;
-  final ImageProvider imageProvider;
-  const ImageContainerDecoration({
+class SectionCardContainerWidget extends StatelessWidget {
+  final SectionCardContainerParameters parameters;
+  const SectionCardContainerWidget({
     Key? key,
-    required this.design,
-    required this.section,
-    required this.height,
-    required this.imageProvider
+    required this.parameters
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(
-        borderRadius: design.circularRadius,
-        boxShadow: [design.shadow],
-        image: DecorationImage(
-          image: imageProvider,
-          fit: BoxFit.cover
-        )
-      ),
-      height: height,
+      decoration: parameters.boxDecoration,
+      child: parameters.child,
+      height: parameters.height,
     );
   }
 }
-class LoadingSectionCardWidget extends StatelessWidget {
-  final Design design;
-  final double height;
-  const LoadingSectionCardWidget({
-    Key? key,
-    required this.design,
-    required this.height
-  }) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        borderRadius: design.circularRadius,
-        boxShadow: [design.shadow],
+class SectionCardContainerParameters{
+  final double height;
+  final BoxDecoration boxDecoration;
+  final Design design;
+  Widget? child;
+  ImageProvider? imageProvider;
+  SectionCardContainerParameters({
+    required this.design,
+    required this.height,
+    required this.boxDecoration,
+    this.child,
+    this.imageProvider
+  });
+}
+
+class ImageContainerParameters extends SectionCardContainerParameters {
+  ImageContainerParameters({
+    required double height,
+    required Design design,
+    required ImageProvider imageProvider
+  }) : super (
+    design: design,
+    height: height,
+    boxDecoration: BoxDecoration(
+      borderRadius: design.circularRadius,
+      boxShadow: [design.shadow],
+      image: DecorationImage(
+        image: imageProvider,
+        fit: BoxFit.cover
+      )
+    ),
+  );
+}
+
+class LoadingContainerParameters extends SectionCardContainerParameters {
+  LoadingContainerParameters({
+    required double height,
+    required Design design,
+  }) : super (
+    design: design,
+    height: height,
+    boxDecoration: BoxDecoration(
+      borderRadius: design.circularRadius,
+      boxShadow: [design.shadow],
+    ),
+    child: const Center(child: CircularProgressIndicator.adaptive())
+  );
+}
+
+class GradientContainerParameters extends SectionCardContainerParameters {
+  GradientContainerParameters({
+    required double height,
+    required Design design,
+    required Widget child
+  }) : super(
+    design: design,
+    height: height,
+    boxDecoration: BoxDecoration(
+      borderRadius: design.circularRadius,
+      gradient: design.gradient
+    ),
+    child: Align(
+      alignment: Alignment.bottomCenter,
+      child: Padding(
+        padding: design.padding,
+        child: child,
       ),
-      height: height,
-      child: const Center(child: CircularProgressIndicator.adaptive(),),
-    );
-  }
+    )
+  );
 }
