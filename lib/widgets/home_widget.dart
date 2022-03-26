@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:generic_restaurant_app/models/app_settings_model.dart';
-import 'package:generic_restaurant_app/models/section_model.dart';
+import 'package:generic_restaurant_app/models/app_settings_model.dart' show AppSettings;
+import 'package:generic_restaurant_app/models/section_model.dart' show SectionModel;
 import 'package:generic_restaurant_app/widgets/scaffold_widget.dart';
 import 'package:generic_restaurant_app/widgets/section_card_widget.dart';
 

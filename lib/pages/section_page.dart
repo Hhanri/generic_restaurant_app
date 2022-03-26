@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:generic_restaurant_app/models/section_model.dart';
-import 'package:generic_restaurant_app/providers/providers.dart';
-import 'package:generic_restaurant_app/resources/theme.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' show Consumer, WidgetRef;
+import 'package:generic_restaurant_app/models/section_model.dart' show SectionModel;
+import 'package:generic_restaurant_app/providers/providers.dart' show appSettingsProvider;
+import 'package:generic_restaurant_app/resources/theme.dart' show Design;
 import 'package:generic_restaurant_app/widgets/product_tile_widget.dart';
 import 'package:generic_restaurant_app/widgets/scaffold_widget.dart';
 

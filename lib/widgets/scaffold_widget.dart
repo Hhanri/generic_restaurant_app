@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:generic_restaurant_app/resources/theme.dart';
+import 'package:generic_restaurant_app/resources/theme.dart' show Design;
 import 'package:generic_restaurant_app/widgets/custom_scroll_widget.dart';
 import 'package:generic_restaurant_app/widgets/glassmorphism_widget.dart';
 

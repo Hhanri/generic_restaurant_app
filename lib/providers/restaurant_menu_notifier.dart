@@ -1,9 +1,9 @@
-import 'dart:convert';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/services.dart';
-import 'package:generic_restaurant_app/models/section_model.dart';
-import 'package:generic_restaurant_app/resources/app_constants.dart';
-import 'package:riverpod/riverpod.dart';
+import 'dart:convert' show json;
+import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseFirestore, DocumentSnapshot;
+import 'package:flutter/services.dart' show rootBundle;
+import 'package:generic_restaurant_app/models/section_model.dart' show SectionModel;
+import 'package:generic_restaurant_app/resources/app_constants.dart' show AppConstants;
+import 'package:riverpod/riverpod.dart' show StateNotifier;
 
 class RestaurantMenuNotifier extends StateNotifier<List<SectionModel>> {
   RestaurantMenuNotifier() : super(_initialState);

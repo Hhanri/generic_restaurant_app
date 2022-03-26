@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:generic_restaurant_app/models/product_model.dart';
+import 'package:generic_restaurant_app/models/product_model.dart' show ProductModel, DisplayPrice;
 
 class ProductTileWidget extends StatelessWidget {
   final ProductModel product;

@@ -1,11 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cached_network_image/cached_network_image.dart' show CachedNetworkImageProvider;
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:generic_restaurant_app/models/section_model.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart' show WidgetRef, Consumer;
+import 'package:generic_restaurant_app/models/section_model.dart' show SectionModel;
 import 'package:generic_restaurant_app/pages/section_page.dart';
-import 'package:generic_restaurant_app/providers/providers.dart';
-import 'package:generic_restaurant_app/resources/theme.dart';
-import 'package:page_transition/page_transition.dart';
+import 'package:generic_restaurant_app/providers/providers.dart' show appSettingsProvider;
+import 'package:generic_restaurant_app/resources/theme.dart' show Design;
+import 'package:page_transition/page_transition.dart' show PageTransition, PageTransitionType;
 
 class SectionCardWidget extends StatelessWidget {
   final SectionModel section;

@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' show ScrollBehavior, Widget, BuildContext, AxisDirection;
 
 class CustomScroll extends ScrollBehavior {
 

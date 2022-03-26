@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:generic_restaurant_app/resources/app_constants.dart';
-import 'package:generic_restaurant_app/resources/theme.dart';
+import 'package:generic_restaurant_app/resources/app_constants.dart' show AppConstants;
+import 'package:generic_restaurant_app/resources/theme.dart' show Design, defaultTheme;
 
 class AppSettings {
   final String appTitle;

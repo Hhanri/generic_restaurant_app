@@ -1,6 +1,6 @@
-import 'dart:ui';
+import 'dart:ui' show ImageFilter;
 import 'package:flutter/material.dart';
-import 'package:generic_restaurant_app/resources/app_constants.dart';
+import 'package:generic_restaurant_app/resources/app_constants.dart' show AppConstants;
 
 final ThemeData defaultTheme = ThemeData(
   textTheme: const TextTheme(

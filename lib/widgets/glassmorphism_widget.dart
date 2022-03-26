@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:generic_restaurant_app/resources/theme.dart';
+import 'package:generic_restaurant_app/resources/theme.dart' show Design;
 
 class GlassmorphismWidget extends StatelessWidget {
   final Design design;

@@ -1,6 +1,6 @@
-import 'package:equatable/equatable.dart';
-import 'package:generic_restaurant_app/models/product_model.dart';
-import 'package:generic_restaurant_app/services/firebase_services.dart';
+import 'package:equatable/equatable.dart' show Equatable;
+import 'package:generic_restaurant_app/models/product_model.dart' show ProductModel;
+import 'package:generic_restaurant_app/services/firebase_services.dart' show FirebaseServices;
 
 class SectionModel extends Equatable{
   final String sectionName;
