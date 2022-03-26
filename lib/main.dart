@@ -27,10 +27,16 @@ class _MyAppState extends ConsumerState<MyApp> {
     super.initState();
     WidgetsBinding.instance?.addPostFrameCallback((_) {
       ref.watch(connectivityProvider.notifier).startListeningConnectivityState();
-      if (ref.watch(connectivityProvider) == false) {
+      try {
+        ref.watch(appSettingsProvider.notifier).fetchFirebaseConfig();
+      } catch(e) {
         ref.watch(restaurantMenuProvider.notifier).fetchLocalData();
       }
-      ref.watch(appSettingsProvider.notifier).loadSettings();
+      try {
+        ref.watch(restaurantMenuProvider.notifier).fetchFirebaseData();
+      } catch(e) {
+        ref.watch(appSettingsProvider.notifier).fetchLocalSettings();
+      }
     });
   }
 

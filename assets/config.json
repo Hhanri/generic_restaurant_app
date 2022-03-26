@@ -1,48 +1,53 @@
 {
-  "appTitle" : "Restaurant",
-  "useDefaultTheme" : false,
-  "theme" : {
-    "mainColor" : "0xFFFFD740",
-    "brightness" : "light",
-    "fontColor" : "0xFFFFFFFF"
-  },
-
-  "design" : {
-    "padding" : 8.0,
-    "circularRadius" : 30,
-    "singleRadius" : 30,
-    "boxShadow" : {
-      "color" : "0xFF000000",
-      "opacity" : 0.6,
-      "spreadRadius" : 2,
-      "blurRadius" : 4,
-      "offSet" : {
-        "x" : 3,
-        "y" : 3
-      }
+  "config" : {
+    "appTitle": "Restaurant",
+    "useDefaultTheme": false,
+    "theme": {
+      "mainColor": "0xFFFFD740",
+      "brightness": "light",
+      "fontColor": "0xFFFFFFFF"
     },
-    "gradient" : {
-      "colors" : [
-        "0x00000000",
-        "0xB3000000",
-        "0xDE000000"
-      ],
-      "stops" : [0.0, 0.6, 0.8]
-    },
-    "glassmorphism" : {
-      "borderWidth" : 1.5,
-      "borderColor" : "0xFFFFFFFF",
-      "borderOpacity" : 0.2,
-      "opacity" : 0.6,
-      "blur" : {
-        "x" : 12,
-        "y" : 12
+    "design": {
+      "padding": 8.0,
+      "circularRadius": 30,
+      "singleRadius": 30,
+      "boxShadow": {
+        "color": "0xFF000000",
+        "opacity": 0.6,
+        "spreadRadius": 2,
+        "blurRadius": 4,
+        "offSet": {
+          "x": 3,
+          "y": 3
+        }
       },
-      "gradient" : {
-        "colors" : [
-          "0x99FFFFFF",
-          "0x1AFFFFFF"
+      "gradient": {
+        "colors": [
+          "0x00000000",
+          "0xB3000000",
+          "0xDE000000"
+        ],
+        "stops": [
+          0.0,
+          0.6,
+          0.8
         ]
+      },
+      "glassmorphism": {
+        "borderWidth": 1.5,
+        "borderColor": "0xFFFFFFFF",
+        "borderOpacity": 0.2,
+        "opacity": 0.6,
+        "blur": {
+          "x": 12,
+          "y": 12
+        },
+        "gradient": {
+          "colors": [
+            "0x99FFFFFF",
+            "0x1AFFFFFF"
+          ]
+        }
       }
     }
   }

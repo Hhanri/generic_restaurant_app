@@ -20,7 +20,6 @@ class SectionCardWidget extends StatelessWidget {
     return Consumer(
       builder: (BuildContext context, WidgetRef ref, Widget? child) {
         final Design design = ref.watch(appSettingsProvider).design;
-        final bool hasInternet = ref.watch(connectivityProvider);
         return GestureDetector(
           onTap: () {
             Navigator.of(context).push(
@@ -37,35 +36,19 @@ class SectionCardWidget extends StatelessWidget {
             padding: design.padding,
             child: Stack(
               children: [
-                hasInternet
-                ? FutureBuilder(
-                    future: ref.watch(firebaseProvider).downloadURL(section.cover),
-                    builder: (BuildContext context, AsyncSnapshot<dynamic> snapshot) {
-                      if (snapshot.hasData) {
-                        print(snapshot.data);
-                        return SectionCardContainerWidget(
-                          parameters: ImageContainerParameters(
-                            design: design,
-                            imageProvider: CachedNetworkImageProvider(snapshot.data),
-                            height: _containerHeight,
-                          )
-                        );
-                      }
-                      return SectionCardContainerWidget(
-                        parameters: LoadingContainerParameters(
-                          design: design,
-                          height: _containerHeight,
-                        )
-                      );
-                    },
-                  )
-                : SectionCardContainerWidget(
-                    parameters: ImageContainerParameters(
-                    design: design,
-                    imageProvider: AssetImage(section.cover),
-                    height: _containerHeight,
+                SectionCardContainerWidget(
+                  parameters: section.cover.startsWith("https://")
+                  ? ImageContainerParameters(
+                      design: design,
+                      imageProvider: CachedNetworkImageProvider(section.cover),
+                      height: _containerHeight,
                     )
-                  ),
+                  : ImageContainerParameters(
+                      design: design,
+                      imageProvider: AssetImage(section.cover),
+                      height: _containerHeight,
+                  )
+                ),
                 SectionCardContainerWidget(
                   parameters: GradientContainerParameters(
                     design: design,
