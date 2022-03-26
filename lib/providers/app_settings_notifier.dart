@@ -18,7 +18,7 @@ class AppSettingsNotifier extends StateNotifier<AppSettings> {
 
   void fetchFirebaseConfig() async {
     final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
-    final response = await _firebaseFirestore.collection(AppConstants.config).doc(AppConstants.config).snapshots().last;
+    final response = await _firebaseFirestore.collection(AppConstants.config).doc(AppConstants.config).snapshots().first;
     final data = response.data()!;
     state = AppSettings.generate(data[AppConstants.config]);
   }
