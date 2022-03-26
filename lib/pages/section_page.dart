@@ -19,14 +19,16 @@ class SectionScreen extends StatelessWidget {
       builder: (BuildContext context, WidgetRef ref, Widget? child) {
         final Design design = ref.watch(appSettingsProvider).design;
         return ScaffoldWidget(
-          title: section.sectionName,
-          design: design,
-          child: Column(
-            children: [
-              ...section.products.map(
-                (product) => ProductTileWidget(product: product)
-              ).toList()
-            ]
+          parameters: SectionScaffoldWidgetParameters(
+            title: section.sectionName,
+            design: design,
+            child: Column(
+              children: [
+                ...section.products.map(
+                  (product) => ProductTileWidget(product: product)
+                ).toList()
+              ]
+            )
           )
         );
       }

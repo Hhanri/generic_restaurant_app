@@ -21,7 +21,6 @@ final ThemeData defaultTheme = ThemeData(
 );
 
 class Design {
-
   final EdgeInsets padding;
   final BorderRadius circularRadius;
   final Radius singleRadius;

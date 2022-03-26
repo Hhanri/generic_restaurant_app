@@ -16,17 +16,19 @@ class HomeWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
-      title: settings.appTitle,
-      child: Column(
-        children: [
-          ...sections.map(
-            (section) => SectionCardWidget(
-              section: section,
-            )
-          ).toList()
-        ],
-      ),
-      design: settings.design,
+      parameters: HomeScaffoldWidgetParameters(
+        title: settings.appTitle,
+        child: Column(
+          children: [
+            ...sections.map(
+              (section) => SectionCardWidget(
+                section: section,
+              )
+            ).toList()
+          ],
+        ),
+        design: settings.design,
+      )
     );
   }
 }

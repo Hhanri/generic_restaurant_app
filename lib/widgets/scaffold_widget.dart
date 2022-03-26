@@ -4,14 +4,10 @@ import 'package:generic_restaurant_app/widgets/custom_scroll_widget.dart';
 import 'package:generic_restaurant_app/widgets/glassmorphism_widget.dart';
 
 class ScaffoldWidget extends StatelessWidget {
-  final String title;
-  final Widget child;
-  final Design design;
+  final ScaffoldWidgetParameters parameters;
   const ScaffoldWidget({
     Key? key,
-    required this.title,
-    required this.child,
-    required this.design
+    required this.parameters
   }) : super(key: key);
 
   @override
@@ -19,22 +15,63 @@ class ScaffoldWidget extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          title,
+          parameters.title,
           style: Theme.of(context).textTheme.headline4,
         ),
+        backgroundColor: parameters is SectionScaffoldWidgetParameters
+          ? Theme.of(context).scaffoldBackgroundColor
+          : Colors.transparent,
       ),
+      backgroundColor: parameters is SectionScaffoldWidgetParameters
+        ? Colors.transparent
+        : Theme.of(context).scaffoldBackgroundColor,
       body: GlassmorphismWidget(
-        design: design,
+        design: parameters.design,
         child: ScrollConfiguration(
           behavior: CustomScroll(),
           child: SingleChildScrollView(
             child: Padding(
-              padding: design.padding,
-              child: child
+              padding: parameters.design.padding,
+              child: parameters.child
             )
           )
         ),
       ),
     );
   }
+}
+
+class ScaffoldWidgetParameters {
+  final String title;
+  final Widget child;
+  final Design design;
+  ScaffoldWidgetParameters({
+    required this.title,
+    required this.child,
+    required this.design
+  });
+}
+
+class HomeScaffoldWidgetParameters extends ScaffoldWidgetParameters {
+  HomeScaffoldWidgetParameters({
+    required String title,
+    required Widget child,
+    required Design design,
+  }) : super(
+    title: title,
+    design: design,
+    child: child
+  );
+}
+
+class SectionScaffoldWidgetParameters extends ScaffoldWidgetParameters {
+  SectionScaffoldWidgetParameters({
+    required String title,
+    required Widget child,
+    required Design design,
+  }) : super(
+    title: title,
+    design: design,
+    child: child
+  );
 }
