@@ -1,5 +1,5 @@
 import 'dart:convert' show json;
-import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseFirestore;
+import 'package:cloud_firestore/cloud_firestore.dart' show FirebaseFirestore, Settings;
 import 'package:flutter/services.dart'show rootBundle;
 import 'package:flutter_riverpod/flutter_riverpod.dart' show StateNotifier;
 import 'package:generic_restaurant_app/models/app_settings_model.dart' show AppSettings;
@@ -18,6 +18,7 @@ class AppSettingsNotifier extends StateNotifier<AppSettings> {
 
   void fetchFirebaseConfig() async {
     final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+    _firebaseFirestore.settings = const Settings(persistenceEnabled: false);
     final response = await _firebaseFirestore.collection(AppConstants.config).doc(AppConstants.config).snapshots().first;
     final data = response.data()!;
     state = AppSettings.generate(data[AppConstants.config]);
