@@ -18,8 +18,8 @@ class RestaurantMenuNotifier extends StateNotifier<List<SectionModel>> {
 
   void fetchFirebaseData() async {
     final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
-    final response = await _firebaseFirestore.collection(AppConstants.restaurantMenu).doc(AppConstants.restaurantMenu).snapshots().first;
-    final data = response.data()!;
+    final DocumentSnapshot<Map<String, dynamic>> response = await _firebaseFirestore.collection(AppConstants.restaurantMenu).doc(AppConstants.restaurantMenu).snapshots().first;
+    final Map<String, dynamic> data = response.data()!;
     state = await _fetchData(data: data, fromFirebase: true);
   }
 

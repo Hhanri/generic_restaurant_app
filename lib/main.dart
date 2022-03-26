@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:generic_restaurant_app/pages/home_page.dart';
 import 'package:generic_restaurant_app/providers/providers.dart';
+import 'package:generic_restaurant_app/services/connectivity_services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -25,17 +26,14 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
-      ref.watch(connectivityProvider.notifier).startListeningConnectivityState();
-      try {
+    WidgetsBinding.instance?.addPostFrameCallback((_) async {
+      final hasInternet = await ConnectivityService.checkConnectivityState();
+      if (hasInternet == true) {
         ref.watch(appSettingsProvider.notifier).fetchFirebaseConfig();
-      } catch(e) {
-        ref.watch(restaurantMenuProvider.notifier).fetchLocalData();
-      }
-      try {
         ref.watch(restaurantMenuProvider.notifier).fetchFirebaseData();
-      } catch(e) {
+      } else {
         ref.watch(appSettingsProvider.notifier).fetchLocalSettings();
+        ref.watch(restaurantMenuProvider.notifier).fetchLocalData();
       }
     });
   }
