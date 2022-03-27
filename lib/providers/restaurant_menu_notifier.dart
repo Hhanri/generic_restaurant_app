@@ -16,7 +16,6 @@ class RestaurantMenuNotifier extends StateNotifier<List<SectionModel>> {
     final String response = prefs.getString(AppConstants.restaurantMenu) ?? await rootBundle.loadString('assets/restaurant_menu.json');
     final data = await json.decode(response);
     state = await _fetchData(data: data, fromFirebase: false);
-    print(state);
   }
 
   void fetchFirebaseData() async {
