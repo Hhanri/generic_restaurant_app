@@ -32,7 +32,7 @@ class _MyAppState extends ConsumerState<MyApp> {
         ref.watch(appSettingsProvider.notifier).fetchFirebaseConfig();
         ref.watch(restaurantMenuProvider.notifier).fetchFirebaseData();
       } else {
-        ref.watch(appSettingsProvider.notifier).fetchLocalSettings();
+        ref.watch(appSettingsProvider.notifier).fetchLocalConfig();
         ref.watch(restaurantMenuProvider.notifier).fetchLocalData();
       }
     });

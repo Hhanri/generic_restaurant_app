@@ -80,6 +80,40 @@ class Design {
     );
   }
 
+  static Map<String, dynamic> designToJson(Design design) {
+    return {
+      AppConstants.padding : design.padding.bottom,
+      AppConstants.circularRadius : design.circularRadius.bottomLeft,
+      AppConstants.singleRadius : design.singleRadius.x,
+      AppConstants.boxShadow : {
+        AppConstants.color : design.shadow.color.value.toString(),
+        AppConstants.opacity : design.shadow.color.opacity,
+        AppConstants.spreadRadius : design.shadow.spreadRadius,
+        AppConstants.blurRadius : design.shadow.blurRadius,
+        AppConstants.offSet : {
+          AppConstants.x : design.shadow.offset.dx,
+          AppConstants.y : design.shadow.offset.dy
+        }
+      },
+      AppConstants.gradient : {
+        AppConstants.colors : design.gradient.colors.map((e) => e.value.toString()).toList(),
+        AppConstants.stops : design.gradient.stops
+      },
+      AppConstants.glassmorphism : {
+        AppConstants.borderWidth : design.glassmorphism.border!.bottom.width,
+        AppConstants.borderColor : design.glassmorphism.border!.bottom.color.value.toString(),
+        AppConstants.borderOpacity : design.glassmorphism.border!.bottom.color.opacity,
+        AppConstants.blur : {
+          AppConstants.x : 3,
+          AppConstants.y : 3
+        },
+        AppConstants.gradient : {
+          AppConstants.colors : design.glassmorphism.gradient!.colors.map((e) => e.value.toString()).toList()
+        }
+      }
+    };
+  }
+
   static Design defaultDesign = Design(
     padding: const EdgeInsets.all(8),
     glassmorphismBlur: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
