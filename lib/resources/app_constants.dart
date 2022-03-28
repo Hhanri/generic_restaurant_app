@@ -27,4 +27,5 @@ class AppConstants {
   static String blur = "blur";
   static String x = "x";
   static String y = "y";
+  static String neumorphism = "neumorphism";
 }

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:generic_restaurant_app/resources/theme.dart' show Design;
 import 'package:generic_restaurant_app/widgets/custom_scroll_widget.dart';
 import 'package:generic_restaurant_app/widgets/glassmorphism_widget.dart';
+import 'package:generic_restaurant_app/widgets/neumorphism_widget.dart';
 
 class ScaffoldWidget extends StatelessWidget {
   final ScaffoldWidgetParameters parameters;
@@ -25,21 +26,40 @@ class ScaffoldWidget extends StatelessWidget {
       backgroundColor: parameters is SectionScaffoldWidgetParameters
         ? Colors.transparent
         : Theme.of(context).scaffoldBackgroundColor,
-      body: GlassmorphismWidget(
-        design: parameters.design,
-        child: ScrollConfiguration(
-          behavior: CustomScroll(),
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: parameters.design.padding,
-              child: parameters.child
-            )
+      body: parameters is SectionScaffoldWidgetParameters
+        ? GlassmorphismWidget(
+            child: BodyScaffoldWidget(parameters: parameters,),
+            design: parameters.design
           )
-        ),
-      ),
+        : NeumorphismWidget(
+            child: BodyScaffoldWidget(parameters: parameters,),
+            design: parameters.design
+          )
     );
   }
 }
+
+class BodyScaffoldWidget extends StatelessWidget {
+  final ScaffoldWidgetParameters parameters;
+  const BodyScaffoldWidget({
+    Key? key,
+    required this.parameters
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return ScrollConfiguration(
+        behavior: CustomScroll(),
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: parameters.design.padding,
+            child: parameters.child
+          )
+        )
+    );
+  }
+}
+
 
 class ScaffoldWidgetParameters {
   final String title;

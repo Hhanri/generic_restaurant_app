@@ -28,6 +28,7 @@ class Design {
   final LinearGradient gradient;
   final BoxDecoration glassmorphism;
   final ImageFilter glassmorphismBlur;
+  final BoxDecoration neumorphism;
   Design({
     required this.padding,
     required this.circularRadius,
@@ -36,13 +37,14 @@ class Design {
     required this.gradient,
     required this.glassmorphism,
     required this.glassmorphismBlur,
+    required this.neumorphism
   });
 
   factory Design.generate(Map<String, dynamic> json) {
 
     final EdgeInsets _padding = EdgeInsets.all(json[AppConstants.padding].toDouble());
-    final BorderRadius _circularRadius = BorderRadius.all(Radius.circular(json[AppConstants.circularRadius].toDouble()));
     final Radius _singleRadius = Radius.circular(json[AppConstants.singleRadius].toDouble());
+    final BorderRadius _circularRadius = BorderRadius.all(Radius.circular(json[AppConstants.circularRadius].toDouble()));
     final BoxShadow _shadow = BoxShadow(
       color: Color(int.parse(json[AppConstants.boxShadow][AppConstants.color])).withOpacity(json[AppConstants.boxShadow][AppConstants.opacity].toDouble()),
       spreadRadius: json[AppConstants.boxShadow][AppConstants.spreadRadius].toDouble(),
@@ -68,6 +70,20 @@ class Design {
       )
     );
     final ImageFilter _glassmorphismBlur = ImageFilter.blur(sigmaX: json[AppConstants.glassmorphism][AppConstants.blur][AppConstants.x].toDouble(), sigmaY: json[AppConstants.glassmorphism][AppConstants.blur][AppConstants.y].toDouble());
+    print("starting to build neu");
+    final BoxDecoration _neumorphism = BoxDecoration(
+      borderRadius: BorderRadius.all(Radius.circular(json[AppConstants.circularRadius].toDouble())),
+      color: Color(int.parse(json[AppConstants.mainColor])),
+      boxShadow: List<BoxShadow>.from(json[AppConstants.neumorphism][AppConstants.boxShadow].map(
+        (shadow) => BoxShadow(
+          color: Color(int.parse(shadow[AppConstants.color])),
+          offset: Offset(shadow[AppConstants.offSet][AppConstants.x].toDouble(), shadow[AppConstants.offSet][AppConstants.y].toDouble()),
+          spreadRadius: shadow[AppConstants.spreadRadius].toDouble(),
+          blurRadius: shadow[AppConstants.blurRadius].toDouble()
+        )
+      ))
+    );
+
 
     return Design(
       padding: _padding,
@@ -77,6 +93,7 @@ class Design {
       gradient: _gradient,
       glassmorphism: _glassmorphism,
       glassmorphismBlur: _glassmorphismBlur,
+      neumorphism: _neumorphism
     );
   }
 
@@ -143,5 +160,23 @@ class Design {
         colors: [Colors.white.withOpacity(0.6), Colors.white.withOpacity(0.1)]
       )
     ),
+    neumorphism: BoxDecoration(
+        borderRadius: const BorderRadius.all(Radius.circular(30)),
+        color: Colors.amberAccent,
+        boxShadow: [
+          BoxShadow(
+            color: Colors.white.withOpacity(0.5),
+            offset: const Offset(-3,-3),
+            spreadRadius: 2,
+            blurRadius: 4
+          ),
+          BoxShadow(
+            color: Colors.black.withOpacity(0.5),
+            offset: const Offset(3,3),
+            spreadRadius: 2,
+            blurRadius: 4
+          )
+        ]
+    )
   );
 }

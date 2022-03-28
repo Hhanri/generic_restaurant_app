@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart' show ProviderScope, Cons
 import 'package:generic_restaurant_app/pages/home_page.dart';
 import 'package:generic_restaurant_app/providers/providers.dart' show appSettingsProvider, restaurantMenuProvider;
 import 'package:generic_restaurant_app/services/connectivity_services.dart' show ConnectivityService;
+import 'package:generic_restaurant_app/services/firebase_services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -28,6 +29,7 @@ class _MyAppState extends ConsumerState<MyApp> {
     super.initState();
     WidgetsBinding.instance?.addPostFrameCallback((_) async {
       final hasInternet = await ConnectivityService.checkConnectivityState();
+      FirebaseServices().loadConfigToFirebase();
       if (hasInternet == true) {
         ref.watch(appSettingsProvider.notifier).fetchFirebaseConfig();
         ref.watch(restaurantMenuProvider.notifier).fetchFirebaseData();
