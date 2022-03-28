@@ -29,7 +29,6 @@ class _MyAppState extends ConsumerState<MyApp> {
     super.initState();
     WidgetsBinding.instance?.addPostFrameCallback((_) async {
       final hasInternet = await ConnectivityService.checkConnectivityState();
-      FirebaseServices().loadConfigToFirebase();
       if (hasInternet == true) {
         ref.watch(appSettingsProvider.notifier).fetchFirebaseConfig();
         ref.watch(restaurantMenuProvider.notifier).fetchFirebaseData();

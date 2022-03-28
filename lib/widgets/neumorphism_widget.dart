@@ -1,24 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:generic_restaurant_app/resources/theme.dart' show Design;
+import 'package:generic_restaurant_app/widgets/scaffold_widget.dart' show BodyScaffoldWidget, ScaffoldWidgetParameters;
 
 class NeumorphismWidget extends StatelessWidget {
-  final Design design;
-  final Widget child;
+  final ScaffoldWidgetParameters parameters;
   const NeumorphismWidget({
     Key? key,
-    required this.child,
-    required this.design
+    required this.parameters,
+
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: design.padding,
+      padding: parameters.design.padding,
       child: Container(
-        decoration: design.neumorphism,
+        decoration: parameters.design.neumorphism,
         child: Align(
           alignment: Alignment.topCenter,
-          child: child,
+          child: BodyScaffoldWidget(
+            parameters: parameters
+          ),
         ),
       ),
     );

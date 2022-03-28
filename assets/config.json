@@ -53,19 +53,19 @@
       "neumorphism" :  {
         "boxShadow" : [
           {
-            "color" : "0x80FFFFFF",
+            "color" : "0x80000000",
             "offSet" : {
-              "x" : -3,
-              "y" : -3
+              "x" : 3,
+              "y" : 3
             },
             "spreadRadius": 2,
             "blurRadius": 4
           },
           {
-            "color" : "0x80000000",
+            "color" : "0x80FFFFFF",
             "offSet" : {
-              "x" : 3,
-              "y" : 3
+              "x" : -3,
+              "y" : -3
             },
             "spreadRadius": 2,
             "blurRadius": 4

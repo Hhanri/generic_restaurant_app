@@ -28,12 +28,10 @@ class ScaffoldWidget extends StatelessWidget {
         : Theme.of(context).scaffoldBackgroundColor,
       body: parameters is SectionScaffoldWidgetParameters
         ? GlassmorphismWidget(
-            child: BodyScaffoldWidget(parameters: parameters,),
-            design: parameters.design
+            parameters: parameters,
           )
         : NeumorphismWidget(
-            child: BodyScaffoldWidget(parameters: parameters,),
-            design: parameters.design
+            parameters: parameters,
           )
     );
   }

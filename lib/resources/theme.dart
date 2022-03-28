@@ -70,7 +70,6 @@ class Design {
       )
     );
     final ImageFilter _glassmorphismBlur = ImageFilter.blur(sigmaX: json[AppConstants.glassmorphism][AppConstants.blur][AppConstants.x].toDouble(), sigmaY: json[AppConstants.glassmorphism][AppConstants.blur][AppConstants.y].toDouble());
-    print("starting to build neu");
     final BoxDecoration _neumorphism = BoxDecoration(
       borderRadius: BorderRadius.all(Radius.circular(json[AppConstants.circularRadius].toDouble())),
       color: Color(int.parse(json[AppConstants.mainColor])),
@@ -132,7 +131,7 @@ class Design {
   }
 
   static Design defaultDesign = Design(
-    padding: const EdgeInsets.all(8),
+    padding: const EdgeInsets.all(12),
     glassmorphismBlur: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
     circularRadius: const BorderRadius.all(Radius.circular(30)),
     singleRadius: const Radius.circular(30),
@@ -161,22 +160,22 @@ class Design {
       )
     ),
     neumorphism: BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(30)),
-        color: Colors.amberAccent,
-        boxShadow: [
-          BoxShadow(
-            color: Colors.white.withOpacity(0.5),
-            offset: const Offset(-3,-3),
-            spreadRadius: 2,
-            blurRadius: 4
-          ),
-          BoxShadow(
-            color: Colors.black.withOpacity(0.5),
-            offset: const Offset(3,3),
-            spreadRadius: 2,
-            blurRadius: 4
-          )
-        ]
+      borderRadius: const BorderRadius.all(Radius.circular(30)),
+      color: Colors.amberAccent,
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black.withOpacity(0.5),
+          offset: const Offset(3,3),
+          spreadRadius: 2,
+          blurRadius: 4
+        ),
+        BoxShadow(
+          color: Colors.white.withOpacity(0.5),
+          offset: const Offset(-3,-3),
+          spreadRadius: 2,
+          blurRadius: 4
+        ),
+      ]
     )
   );
 }

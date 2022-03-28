@@ -1,28 +1,28 @@
 import 'package:flutter/material.dart';
-import 'package:generic_restaurant_app/resources/theme.dart' show Design;
+import 'package:generic_restaurant_app/widgets/scaffold_widget.dart' show BodyScaffoldWidget, ScaffoldWidgetParameters;
 
 class GlassmorphismWidget extends StatelessWidget {
-  final Design design;
-  final Widget child;
+  final ScaffoldWidgetParameters parameters;
   const GlassmorphismWidget({
     Key? key,
-    required this.child,
-    required this.design
+    required this.parameters
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: design.padding,
+      padding: parameters.design.padding,
       child: ClipRRect(
-        borderRadius: design.circularRadius,
+        borderRadius: parameters.design.circularRadius,
         child: BackdropFilter(
-          filter: design.glassmorphismBlur,
+          filter: parameters.design.glassmorphismBlur,
           child: Container(
-            decoration: design.glassmorphism,
+            decoration: parameters.design.glassmorphism,
             child: Align(
               alignment: Alignment.topCenter,
-              child: child,
+              child: BodyScaffoldWidget(
+                parameters: parameters
+              ),
             ),
           ),
         ),
