@@ -55,7 +55,7 @@ class Design {
       begin: Alignment.topCenter,
       end: Alignment.bottomCenter,
       colors: List<Color>.from(json[AppConstants.gradient][AppConstants.colors].map((var value) => Color(int.parse(value)))),
-      stops: List<double>.from(json[AppConstants.gradient][AppConstants.stops])
+      stops: List<double>.from(json[AppConstants.gradient][AppConstants.stops].map((e) => e.toDouble()))
     );
     final BoxDecoration _glassmorphism = BoxDecoration(
       borderRadius: BorderRadius.all(Radius.circular(json[AppConstants.circularRadius].toDouble())),
@@ -82,7 +82,6 @@ class Design {
         )
       ))
     );
-
 
     return Design(
       padding: _padding,
