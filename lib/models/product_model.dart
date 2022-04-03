@@ -1,4 +1,5 @@
 import 'package:equatable/equatable.dart' show Equatable;
+import 'package:generic_restaurant_app/resources/app_constants.dart' show AppConstants;
 
 class ProductModel extends Equatable{
   final String productName;
@@ -11,14 +12,14 @@ class ProductModel extends Equatable{
 
   factory ProductModel.fromJson(Map<String, dynamic> data) {
     return ProductModel(
-      productName: data["productName"],
-      price: data["price"]
+      productName: data[AppConstants.productName],
+      price: data[AppConstants.price]
     );
   }
   static Map<String, String> toJson(ProductModel model) {
     return {
-      "productName" : model.productName,
-      "price" : model.price
+      AppConstants.productName : model.productName,
+      AppConstants.price : model.price
     };
   }
 

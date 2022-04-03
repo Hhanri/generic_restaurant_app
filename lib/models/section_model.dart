@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart' show Equatable;
 import 'package:generic_restaurant_app/models/product_model.dart' show ProductModel;
+import 'package:generic_restaurant_app/resources/app_constants.dart' show AppConstants;
 import 'package:generic_restaurant_app/services/firebase_services.dart' show FirebaseServices;
 
 class SectionModel extends Equatable{
@@ -15,17 +16,17 @@ class SectionModel extends Equatable{
 
   static Future<SectionModel> fromJson({required Map<String, dynamic> data, required bool fromFirebase}) async {
     return SectionModel(
-      sectionName: data["sectionName"],
-      products: List<ProductModel>.from(data["products"].map((jsonProduct) => ProductModel.fromJson(jsonProduct))),
-      cover: fromFirebase ? await FirebaseServices().downloadURL(data["cover"]) : data["cover"]
+      sectionName: data[AppConstants.sectionName],
+      products: List<ProductModel>.from(data[AppConstants.products].map((jsonProduct) => ProductModel.fromJson(jsonProduct))),
+      cover: fromFirebase ? await FirebaseServices().downloadURL(data[AppConstants.cover]) : data[AppConstants.cover]
     );
   }
 
   static Map<String, dynamic> toJson(SectionModel model) {
     return {
-      "sectionName" : model.sectionName,
-      "products" : List<Map<String, dynamic>>.from(model.products.map((product) => ProductModel.toJson(product))),
-      "cover" : model.cover
+      AppConstants.sectionName : model.sectionName,
+      AppConstants.products : List<Map<String, dynamic>>.from(model.products.map((product) => ProductModel.toJson(product))),
+      AppConstants.cover : model.cover
     };
   }
 
