@@ -26,9 +26,10 @@ class RestaurantMenuBloc extends Bloc<RestaurantMenuEvent, RestaurantMenuState> 
 
     on<FetchLocalRestaurantMenuEvent>((event, emit) async {
       final SharedPreferences prefs = await SharedPreferences.getInstance();
-      final String response = prefs.getString(AppConstants.restaurantMenu) ?? await rootBundle.loadString('assets/restaurant_menu.json');
+      final String response = prefs.getString(AppConstants.restaurantMenu) ?? await rootBundle.loadString('assets/restaurant_menu_bloc.json');
       final data = await json.decode(response);
       sections = await _fetchData(data: data, fromFirebase: false);
+      emit(RestaurantMenuLoadedState(sections: sections));
     });
 
     on<FetchFirebaseRestaurantMenuEvent>((event, emit) async {
@@ -36,8 +37,8 @@ class RestaurantMenuBloc extends Bloc<RestaurantMenuEvent, RestaurantMenuState> 
       _firebaseFirestore.settings = const Settings(persistenceEnabled: false);
       final DocumentSnapshot<Map<String, dynamic>> response = await _firebaseFirestore.collection(AppConstants.restaurantMenu).doc(AppConstants.restaurantMenu).snapshots().first;
       final Map<String, dynamic> data = response.data()!;
-
       sections = await _fetchData(data: data, fromFirebase: true);
+      emit(RestaurantMenuLoadedState(sections: sections));
       final Map<String, dynamic> updatedData = {AppConstants.restaurantMenu : SectionModel.listToJson(sections)};
       add(SaveRestaurantMenuToLocalEvent(data: updatedData));
     });
