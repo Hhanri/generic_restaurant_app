@@ -1,9 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart' show CachedNetworkImageProvider;
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' show WidgetRef, Consumer;
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:generic_restaurant_app/bloc/restaurant_bloc/restaurant_bloc.dart';
 import 'package:generic_restaurant_app/models/section_model.dart' show SectionModel;
 import 'package:generic_restaurant_app/pages/section_page.dart';
-import 'package:generic_restaurant_app/providers/providers.dart' show appSettingsProvider;
 import 'package:generic_restaurant_app/resources/theme.dart' show Design;
 import 'package:page_transition/page_transition.dart' show PageTransition, PageTransitionType;
 
@@ -17,53 +17,49 @@ class SectionCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final double _containerHeight = MediaQuery.of(context).size.height/4;
-    return Consumer(
-      builder: (BuildContext context, WidgetRef ref, Widget? child) {
-        final Design design = ref.watch(appSettingsProvider).design;
-        return GestureDetector(
-          onTap: () {
-            Navigator.of(context).push(
-              PageTransition(
-                child: SectionScreen(
-                  section: section,
-                  //design: design,
-                ),
-                type: PageTransitionType.leftToRight,
-              )
-            );
-          },
-          child: Padding(
-            padding: design.padding,
-            child: Stack(
-              children: [
-                SectionCardContainerWidget(
-                  parameters: section.cover.startsWith("https://")
-                  ? ImageContainerParameters(
-                      design: design,
-                      imageProvider: CachedNetworkImageProvider(section.cover),
-                      height: _containerHeight,
-                    )
-                  : ImageContainerParameters(
-                      design: design,
-                      imageProvider: AssetImage(section.cover),
-                      height: _containerHeight,
-                  )
-                ),
-                SectionCardContainerWidget(
-                  parameters: GradientContainerParameters(
-                    design: design,
-                    height: _containerHeight,
-                    child: Text(
-                      section.sectionName,
-                      style: Theme.of(context).textTheme.headline6,
-                    ),
-                  ),
-                )
-              ],
-            )
-          ),
+    final Design design = BlocProvider.of<RestaurantBloc>(context).config.design;
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(
+          PageTransition(
+            child: SectionScreen(
+              section: section,
+              //design: design,
+            ),
+            type: PageTransitionType.leftToRight,
+          )
         );
-      }
+      },
+      child: Padding(
+        padding: design.padding,
+        child: Stack(
+          children: [
+            SectionCardContainerWidget(
+              parameters: section.cover.startsWith("https://")
+              ? ImageContainerParameters(
+                  design: design,
+                  imageProvider: CachedNetworkImageProvider(section.cover),
+                  height: _containerHeight,
+                )
+              : ImageContainerParameters(
+                  design: design,
+                  imageProvider: AssetImage(section.cover),
+                  height: _containerHeight,
+              )
+            ),
+            SectionCardContainerWidget(
+              parameters: GradientContainerParameters(
+                design: design,
+                height: _containerHeight,
+                child: Text(
+                  section.sectionName,
+                  style: Theme.of(context).textTheme.headline6,
+                ),
+              ),
+            )
+          ],
+        )
+      ),
     );
   }
 }

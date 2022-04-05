@@ -1,10 +1,10 @@
 import 'package:firebase_core/firebase_core.dart' show Firebase;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show SystemChrome, DeviceOrientation;
-import 'package:flutter_riverpod/flutter_riverpod.dart' show ProviderScope, ConsumerStatefulWidget, ConsumerState;
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:generic_restaurant_app/bloc/restaurant_bloc/restaurant_bloc.dart';
+import 'package:generic_restaurant_app/models/app_settings_model.dart';
 import 'package:generic_restaurant_app/pages/home_page.dart';
-import 'package:generic_restaurant_app/providers/providers.dart' show appSettingsProvider, restaurantMenuProvider;
-import 'package:generic_restaurant_app/services/connectivity_services.dart' show ConnectivityService;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,40 +12,29 @@ void main() async {
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
   ]);
-  runApp(const ProviderScope(child: MyApp()));
+  runApp(const MyApp());
 }
 
-class MyApp extends ConsumerStatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
   @override
-  _MyAppState createState() => _MyAppState();
-}
-
-class _MyAppState extends ConsumerState<MyApp> {
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance?.addPostFrameCallback((_) async {
-      final hasInternet = await ConnectivityService.checkConnectivityState();
-      if (hasInternet == true) {
-        print("YES INTERNET");
-        ref.watch(appSettingsProvider.notifier).fetchFirebaseConfig();
-        ref.watch(restaurantMenuProvider.notifier).fetchFirebaseData();
-      } else {
-        print("NO INTERNET");
-        ref.watch(appSettingsProvider.notifier).fetchLocalConfig();
-        ref.watch(restaurantMenuProvider.notifier).fetchLocalData();
-      }
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Restaurant App',
-      theme: ref.watch(appSettingsProvider).theme,
-      home: const HomeScreen(),
+    return BlocProvider<RestaurantBloc>(
+      create: (BuildContext context) => RestaurantBloc(sections: [], config: AppSettings.generateDefault())..add(FetchLocalRestaurantEvent()),
+      child: BlocBuilder<RestaurantBloc, RestaurantState>(
+        builder: (context, state) {
+          AppSettings config = BlocProvider.of<RestaurantBloc>(context).config;
+          if (state is RestaurantLoadedState) {
+            config = state.config;
+          }
+          return MaterialApp(
+            title: 'Restaurant App',
+            theme: config.theme,
+            home: const HomeScreen(),
+          );
+        },
+      ),
     );
   }
 }

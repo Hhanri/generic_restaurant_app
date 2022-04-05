@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart' show Consumer, WidgetRef;
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:generic_restaurant_app/bloc/restaurant_bloc/restaurant_bloc.dart';
 import 'package:generic_restaurant_app/models/section_model.dart' show SectionModel;
-import 'package:generic_restaurant_app/providers/providers.dart' show appSettingsProvider;
 import 'package:generic_restaurant_app/resources/theme.dart' show Design;
 import 'package:generic_restaurant_app/widgets/product_tile_widget.dart';
 import 'package:generic_restaurant_app/widgets/scaffold_widget.dart';
@@ -15,9 +15,7 @@ class SectionScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(
-      builder: (BuildContext context, WidgetRef ref, Widget? child) {
-        final Design design = ref.watch(appSettingsProvider).design;
+        final Design design = BlocProvider.of<RestaurantBloc>(context).config.design;
         return ScaffoldWidget(
           parameters: SectionScaffoldWidgetParameters(
             title: section.sectionName,
@@ -31,7 +29,5 @@ class SectionScreen extends StatelessWidget {
             )
           )
         );
-      }
-    );
   }
 }
