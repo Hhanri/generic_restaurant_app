@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:generic_restaurant_app/bloc/restaurant_bloc/restaurant_bloc.dart';
 import 'package:generic_restaurant_app/models/app_settings_model.dart';
 import 'package:generic_restaurant_app/pages/home_page.dart';
+import 'package:generic_restaurant_app/services/connectivity_services.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,20 +21,27 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<RestaurantBloc>(
-      create: (BuildContext context) => RestaurantBloc(sections: [], config: AppSettings.generateDefault())..add(FetchLocalRestaurantEvent()),
-      child: BlocBuilder<RestaurantBloc, RestaurantState>(
-        builder: (context, state) {
-          AppSettings config = BlocProvider.of<RestaurantBloc>(context).config;
-          if (state is RestaurantLoadedState) {
-            config = state.config;
-          }
-          return MaterialApp(
-            title: 'Restaurant App',
-            theme: config.theme,
-            home: const HomeScreen(),
-          );
-        },
+    return RepositoryProvider(
+      create: (BuildContext context) => ConnectivityService(),
+      child: BlocProvider(
+        create: (BuildContext context) => RestaurantBloc(
+          connectivity: RepositoryProvider.of<ConnectivityService>(context),
+          sections: [],
+          config: AppSettings.generateDefault()
+        ),
+        child: BlocBuilder<RestaurantBloc, RestaurantState>(
+          builder: (context, state) {
+            AppSettings config = BlocProvider.of<RestaurantBloc>(context).config;
+            if (state is RestaurantLoadedState) {
+              config = state.config;
+            }
+            return MaterialApp(
+              title: 'Restaurant App',
+              theme: config.theme,
+              home: const HomeScreen(),
+            );
+          },
+        ),
       ),
     );
   }

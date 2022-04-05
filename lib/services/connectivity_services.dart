@@ -1,9 +1,15 @@
-import 'package:connectivity_plus/connectivity_plus.dart' show Connectivity, ConnectivityResult;
 import 'dart:async';
+import 'package:connectivity_plus/connectivity_plus.dart';
 
 class ConnectivityService {
-  static final _connectivity = Connectivity();
-  static Future<bool> checkConnectivityState()async {
-    return await _connectivity.checkConnectivity() != ConnectivityResult.none;
+  final _connectivity = Connectivity();
+  final connectivityStream = StreamController<ConnectivityResult>();
+
+  ConnectivityService()  {
+    _connectivity.onConnectivityChanged.listen((event) async {
+      connectivityStream.add(event);
+    });
   }
+
+  Future<ConnectivityResult> get getResult async => await _connectivity.checkConnectivity();
 }

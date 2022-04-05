@@ -1,12 +1,13 @@
-import 'dart:async';
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/services.dart';
 import 'package:generic_restaurant_app/models/app_settings_model.dart';
 import 'package:generic_restaurant_app/models/section_model.dart';
 import 'package:generic_restaurant_app/resources/app_constants.dart';
+import 'package:generic_restaurant_app/services/connectivity_services.dart';
 import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -14,9 +15,26 @@ part 'restaurant_event.dart';
 part 'restaurant_state.dart';
 
 class RestaurantBloc extends Bloc<RestaurantMenuEvent, RestaurantState> {
+  final ConnectivityService connectivity;
   List<SectionModel> sections;
   AppSettings config;
-  RestaurantBloc({required this.sections, required this.config}) : super(RestaurantLoadingState()) {
+  RestaurantBloc({required this.connectivity,required this.sections, required this.config}) : super(RestaurantLoadingState()) {
+
+    connectivity.getResult.then((event) {
+      if (event == ConnectivityResult.none) {
+        add(FetchLocalRestaurantEvent());
+      } else {
+        add(FetchFirebaseRestaurantEvent());
+      }
+    });
+
+    connectivity.connectivityStream.stream.listen((event) {
+      if (event == ConnectivityResult.none) {
+        add(FetchLocalRestaurantEvent());
+      } else {
+        add(FetchFirebaseRestaurantEvent());
+      }
+    });
 
     Future<List<SectionModel>> _fetchData({required Map<String, dynamic> data, required bool fromFirebase}) async {
       final List<SectionModel> treatedData = await SectionModel.listFromJson(
