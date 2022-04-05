@@ -9,7 +9,7 @@ class FirebaseServices {
   final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
 
   void loadMenuToFirebase() async {
-    final String response = await rootBundle.loadString('assets/restaurant_menu_bloc.json');
+    final String response = await rootBundle.loadString('assets/restaurant_bloc.json');
     final data = await json.decode(response);
     _firebaseFirestore.collection(AppConstants.restaurantMenu).doc(AppConstants.restaurantMenu).set(data);
   }

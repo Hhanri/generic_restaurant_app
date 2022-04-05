@@ -13,7 +13,7 @@ class RestaurantMenuNotifier extends StateNotifier<List<SectionModel>> {
 
   void fetchLocalData() async {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
-    final String response = prefs.getString(AppConstants.restaurantMenu) ?? await rootBundle.loadString('assets/restaurant_menu_bloc.json');
+    final String response = prefs.getString(AppConstants.restaurantMenu) ?? await rootBundle.loadString('assets/restaurant_bloc.json');
     final data = await json.decode(response);
     state = await _fetchData(data: data, fromFirebase: false);
   }
